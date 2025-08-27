@@ -224,7 +224,7 @@
     container.innerHTML = '';
     if (tab.url && tab.url !== 'about:blank') {
       const iframe = document.createElement('iframe');
-      iframe.src = `https://qz-star.github.io/s/embed.html#${tab.url}`;
+      iframe.src = `/s/embed.html#${tab.url}`;
       container.appendChild(iframe);
     }
   }
