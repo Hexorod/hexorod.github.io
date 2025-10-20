@@ -24,11 +24,11 @@
 
 <script>
   // Automatically load TikTok through your proxy
-  const url = 'https://www.tiktok.com';
+  const url = 'https://www.tiktok.com'; // raw URL, no encoding
   const container = document.getElementById('content');
 
   const iframe = document.createElement('iframe');
-  iframe.src = `/s/embed.html#${encodeURIComponent(url)}`;
+  iframe.src = `/s/embed.html#${url}`;
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';
