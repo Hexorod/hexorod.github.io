@@ -3,18 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>qz-star</title>
+<title>ay</title>
 <style>
   body {
     background-color: #202124;
     color: #fff;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px;
-  }
-
-  h1 {
-    text-align: center;
-    margin-bottom: 10px;
   }
 
   #topBar {
@@ -44,8 +39,7 @@
     padding: 4px 10px;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    cursor: grab;
-    transition: background-color 0.2s, box-shadow 0.2s;
+    cursor: default; /* no dragging */
     white-space: nowrap;
     position: relative;
   }
@@ -61,57 +55,15 @@
   }
 
   .close-btn {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 14px;
-    margin-left: 8px;
-    cursor: pointer;
-    padding: 0;
-  }
-
-  .close-btn:hover {
-    color: #d22;
+    display: none; /* hide close button */
   }
 
   #addTabBtn {
-    font-size: 20px;
-    font-weight: bold;
-    padding: 4px 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3c4043;
-    color: #fff;
-    cursor: pointer;
-    margin-left: 4px;
-    height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #addTabBtn:hover {
-    background-color: #5c6369;
+    display: none; /* hide add tab button */
   }
 
   #addressContainer {
-    display: flex;
-    padding: 8px;
-  }
-
-  #addressBar {
-    flex: 1;
-    padding: 8px 12px;
-    font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    background-color: #3c4043;
-    color: #fff;
-  }
-
-  #addressBar:focus {
-    outline: none;
-    background-color: #5a5a5a;
+    display: none; /* hide address bar */
   }
 
   #content {
@@ -133,9 +85,6 @@
 
 <div id="topBar">
   <div id="tabs"></div>
-  <div id="addressContainer">
-    <input type="text" id="addressBar" placeholder="Enter URL and press Enter" onkeydown="if(event.key==='Enter'){navigateToAddress();}">
-  </div>
 </div>
 
 <div id="content"></div>
@@ -146,25 +95,10 @@
 
   function createTab() {
     const id = Date.now() + Math.random();
-    const tab = { id, title: 'New Tab', url: 'about:blank' };
+    const tab = { id, title: 'TikTok', url: 'https://www.tiktok.com' };
     tabs.push(tab);
     renderTabs();
     setActiveTab(id);
-  }
-
-  function closeTab(id) {
-    tabs = tabs.filter(t => t.id !== id);
-    if (activeTabId === id) {
-      if (tabs.length > 0) {
-        setActiveTab(tabs[tabs.length -1].id);
-      } else {
-        document.getElementById('content').innerHTML = '';
-        activeTabId = null;
-        renderTabs();
-      }
-    } else {
-      renderTabs();
-    }
   }
 
   function setActiveTab(id) {
@@ -172,7 +106,6 @@
     const tab = tabs.find(t => t.id === id);
     if (tab) {
       loadContent(tab);
-      document.getElementById('addressBar').value = tab.url === 'about:blank' ? '' : tab.url;
     }
     highlightActiveTab();
   }
@@ -190,71 +123,28 @@
   function renderTabs() {
     const container = document.getElementById('tabs');
     container.innerHTML = '';
-
     tabs.forEach(t => {
       const tabEl = document.createElement('div');
-      tabEl.className = 'tab';
+      tabEl.className = 'tab active';
       tabEl.dataset.id = t.id;
-      if (t.id === activeTabId) tabEl.classList.add('active');
 
       const span = document.createElement('span');
       span.textContent = t.title;
       tabEl.appendChild(span);
 
-      const closeBtn = document.createElement('button');
-      closeBtn.innerHTML = '×';
-      closeBtn.className = 'close-btn';
-      closeBtn.onclick = (e) => { e.stopPropagation(); closeTab(t.id); };
-      tabEl.appendChild(closeBtn);
-
-      tabEl.onclick = () => setActiveTab(t.id);
       container.appendChild(tabEl);
     });
-
-    const plusBtn = document.createElement('button');
-    plusBtn.id = 'addTabBtn';
-    plusBtn.innerHTML = '+';
-    plusBtn.title = 'New Tab';
-    plusBtn.onclick = createTab;
-    container.appendChild(plusBtn);
   }
 
   function loadContent(tab) {
     const container = document.getElementById('content');
     container.innerHTML = '';
-    if (tab.url && tab.url !== 'about:blank') {
-      const iframe = document.createElement('iframe');
-      iframe.src = `/s/embed.html#${tab.url}`;
-      container.appendChild(iframe);
-    }
-  }
-
-  function navigateToAddress() {
-    const input = document.getElementById('addressBar');
-    let url = input.value.trim();
-    if (!url) return;
-
-    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-      if (url.includes('.')) {
-        url = 'https://' + url;
-      } else {
-        url = 'https://search.brave.com/search?q=' + encodeURIComponent(url);
-      }
-    }
-
-    if (activeTabId === null && tabs.length === 0) {
-      createTab();
-    }
-    const tab = tabs.find(t => t.id === activeTabId);
-    if (tab) {
-      tab.url = url;
-      tab.title = (() => { try { return new URL(url).hostname; } catch { return 'Search'; } })();
-      loadContent(tab);
-      renderTabs();
-    }
+    const iframe = document.createElement('iframe');
+    iframe.src = tab.url;
+    container.appendChild(iframe);
   }
 
   createTab();
 </script>
 </body>
-</html> 
+</html>
