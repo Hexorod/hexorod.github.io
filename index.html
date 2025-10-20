@@ -3,148 +3,37 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>ay</title>
+<title>qz-star</title>
 <style>
   body {
+    margin: 0;
     background-color: #202124;
-    color: #fff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 20px;
-  }
-
-  #topBar {
-    display: flex;
-    flex-direction: column;
-    border-radius: 8px;
+    height: 100vh;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-    background-color: #2c2c2c;
-    width: 100%;
-  }
-
-  #tabs {
-    display: flex;
-    align-items: center;
-    overflow-x: auto;
-    background-color: #2c2c2c;
-    padding: 4px 8px;
-    height: 44px;
-  }
-
-  .tab {
-    display: flex;
-    align-items: center;
-    background-color: #3c4043;
-    margin-right: 4px;
-    padding: 4px 10px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    cursor: default; /* no dragging */
-    white-space: nowrap;
-    position: relative;
-  }
-
-  .tab.active {
-    background-color: #1a73e8;
-    box-shadow: inset 0 -2px 0 #fff;
-  }
-
-  .tab span {
-    margin-right: 8px;
-    font-size: 14px;
-  }
-
-  .close-btn {
-    display: none; /* hide close button */
-  }
-
-  #addTabBtn {
-    display: none; /* hide add tab button */
-  }
-
-  #addressContainer {
-    display: none; /* hide address bar */
   }
 
   #content {
-    margin-top: 8px;
-    height: 600px;
-    border-radius: 0 0 8px 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  }
-
-  iframe {
     width: 100%;
     height: 100%;
-    border: none;
   }
 </style>
 </head>
 <body>
 
-<div id="topBar">
-  <div id="tabs"></div>
-</div>
-
 <div id="content"></div>
 
 <script>
-  let tabs = [];
-  let activeTabId = null;
+  // Automatically load TikTok through your proxy
+  const url = 'https://www.tiktok.com';
+  const container = document.getElementById('content');
 
-  function createTab() {
-    const id = Date.now() + Math.random();
-    const tab = { id, title: 'TikTok', url: 'https://www.tiktok.com' };
-    tabs.push(tab);
-    renderTabs();
-    setActiveTab(id);
-  }
-
-  function setActiveTab(id) {
-    activeTabId = id;
-    const tab = tabs.find(t => t.id === id);
-    if (tab) {
-      loadContent(tab);
-    }
-    highlightActiveTab();
-  }
-
-  function highlightActiveTab() {
-    document.querySelectorAll('.tab').forEach(t => {
-      if (parseFloat(t.dataset.id) === activeTabId) {
-        t.classList.add('active');
-      } else {
-        t.classList.remove('active');
-      }
-    });
-  }
-
-  function renderTabs() {
-    const container = document.getElementById('tabs');
-    container.innerHTML = '';
-    tabs.forEach(t => {
-      const tabEl = document.createElement('div');
-      tabEl.className = 'tab active';
-      tabEl.dataset.id = t.id;
-
-      const span = document.createElement('span');
-      span.textContent = t.title;
-      tabEl.appendChild(span);
-
-      container.appendChild(tabEl);
-    });
-  }
-
-  function loadContent(tab) {
-    const container = document.getElementById('content');
-    container.innerHTML = '';
-    const iframe = document.createElement('iframe');
-    iframe.src = tab.url;
-    container.appendChild(iframe);
-  }
-
-  createTab();
+  const iframe = document.createElement('iframe');
+  iframe.src = `/s/embed.html#${encodeURIComponent(url)}`;
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = 'none';
+  container.appendChild(iframe);
 </script>
+
 </body>
 </html>
