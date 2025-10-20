@@ -17,14 +17,21 @@
     height: 100%;
   }
 </style>
+<script>
+  // Prevent direct access — only allow if inside an iframe
+  if (window.top === window.self) {
+    // Not in an iframe: blank out the page
+    document.documentElement.innerHTML = ""; 
+    // Optional: stop everything else from running
+    throw new Error("Direct access blocked");
+  }
+</script>
 </head>
 <body>
-
 <div id="content"></div>
 
 <script>
-  // Automatically load TikTok through your proxy
-  const url = 'https://www.tiktok.com'; // raw URL, no encoding
+  const url = 'https://www.tiktok.com';
   const container = document.getElementById('content');
 
   const iframe = document.createElement('iframe');
@@ -34,6 +41,5 @@
   iframe.style.border = 'none';
   container.appendChild(iframe);
 </script>
-
 </body>
 </html>
