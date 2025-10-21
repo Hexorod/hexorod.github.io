@@ -10,11 +10,25 @@
     background-color: #202124;
     height: 100vh;
     overflow: hidden;
+    color: #fff;
+    font-family: Arial, sans-serif;
   }
 
   #content {
     width: 100%;
-    height: 100%;
+    height: calc(100% - 40px);
+  }
+
+  #debug {
+    height: 40px;
+    background: #111;
+    color: #0f0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    border-top: 1px solid #333;
   }
 </style>
 <script>
@@ -27,15 +41,20 @@
 </head>
 <body>
 <div id="content"></div>
+<div id="debug">Detecting...</div>
 
 <script>
   const url = 'https://www.tiktok.com';
   const container = document.getElementById('content');
+  const debug = document.getElementById('debug');
 
   // --- Automatically detect base path ---
   const segments = location.pathname.split('/').filter(Boolean);
   const base = segments.length ? `/${segments[0]}/` : '/';
-  const embedUrl = location.origin + base + 's/embed.html#' + encodeURIComponent(url);
+  const embedUrl = location.origin + base + 's/embed.html#' + url; // ✅ no encodeURIComponent
+
+  // --- Display the detected URL for testing ---
+  debug.textContent = 'Embed URL → ' + embedUrl;
 
   // --- Create iframe ---
   const iframe = document.createElement('iframe');
