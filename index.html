@@ -51,7 +51,7 @@
   // --- Automatically detect base path ---
   const segments = location.pathname.split('/').filter(Boolean);
   const base = segments.length ? `/${segments[0]}/` : '/';
-  const embedUrl = location.origin + base + 's/embed.html#' + url; // ✅ no encodeURIComponent
+  const embedUrl = location.origin + base + '/estertester/s/embed.html#' + url; // ✅ no encodeURIComponent
 
   // --- Display the detected URL for testing ---
   debug.textContent = 'Embed URL → ' + embedUrl;
