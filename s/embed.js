@@ -11,6 +11,11 @@ try {
 	throw err;
 }
 
+// Register the service worker from a custom URL
+function registerSW() {
+	return navigator.serviceWorker.register("https://hexorod.github.io/estertester/s/uv-sw.js");
+}
+
 registerSW()
 	.then(() => {
 		window.open(
