@@ -16,40 +16,45 @@
       color: #fff;
       font-family: "Segoe UI", Arial, sans-serif;
       height: 100vh;
+      width: 100vw;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+    }
+
+    .wrapper {
       text-align: center;
-      overflow: hidden; /* disables scrolling */
+      transform-origin: center;
+      transition: transform 0.2s ease;
+    }
+
+    h2 {
+      margin: 5px 0;
+      font-size: 1.5rem;
     }
 
     img {
-      width: 20vw;
-      max-width: 250px;
+      width: 250px;
       height: auto;
       margin: 10px 0;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
 
-    h2 {
-      margin-bottom: 8px;
-      font-size: 1.2rem;
+    @media (max-height: 700px), (max-width: 700px) {
+      h2 { font-size: 1.1rem; }
+      img { width: 180px; }
     }
 
-    .wrapper {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 15px;
-      transform: scale(0.95);
+    @media (max-height: 500px), (max-width: 500px) {
+      h2 { font-size: 0.9rem; }
+      img { width: 140px; }
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="wrapper" id="wrapper">
     <h2>lil bruh is not getting the site</h2>
     <img src="pic/flight.PNG" alt="flight" />
 
@@ -59,5 +64,19 @@
     <h2>ur not getting ts</h2>
     <img src="pic/kodakblack.PNG" alt="kodakblack" />
   </div>
+
+  <script>
+    // Automatically scale the content to fit any screen size
+    function resizeToFit() {
+      const wrapper = document.getElementById("wrapper");
+      const scaleX = window.innerWidth / wrapper.scrollWidth;
+      const scaleY = window.innerHeight / wrapper.scrollHeight;
+      const scale = Math.min(scaleX, scaleY);
+      wrapper.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener("resize", resizeToFit);
+    window.addEventListener("load", resizeToFit);
+  </script>
 </body>
 </html>
