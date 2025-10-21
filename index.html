@@ -5,33 +5,59 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>lil bruh alert</title>
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background-color: #111;
       color: #fff;
       font-family: "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       text-align: center;
-      margin-top: 50px;
+      overflow: hidden; /* disables scrolling */
     }
+
     img {
-      width: 250px;
+      width: 20vw;
+      max-width: 250px;
       height: auto;
-      margin: 15px 0;
+      margin: 10px 0;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
+
     h2 {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      transform: scale(0.95);
     }
   </style>
 </head>
 <body>
-  <h2>lil bruh is not getting the site</h2>
-  <img src="pic/flight.PNG" alt="flight" />
+  <div class="wrapper">
+    <h2>lil bruh is not getting the site</h2>
+    <img src="pic/flight.PNG" alt="flight" />
 
-  <h2>u think ur smart tryna go to this link but it aint that easy</h2>
-  <img src="pic/haha.PNG" alt="haha" />
+    <h2>u think ur smart tryna go to this link but it aint that easy</h2>
+    <img src="pic/haha.PNG" alt="haha" />
 
-  <h2>ur not getting ts</h2>
-  <img src="pic/kodakblack.PNG" alt="kodakblack" />
+    <h2>ur not getting ts</h2>
+    <img src="pic/kodakblack.PNG" alt="kodakblack" />
+  </div>
 </body>
 </html>
