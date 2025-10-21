@@ -20,9 +20,7 @@
 <script>
   // Prevent direct access — only allow if inside an iframe
   if (window.top === window.self) {
-    // Not in an iframe: blank out the page
-    document.documentElement.innerHTML = ""; 
-    // Optional: stop everything else from running
+    document.documentElement.innerHTML = "";
     throw new Error("Direct access blocked");
   }
 </script>
@@ -34,8 +32,14 @@
   const url = 'https://www.tiktok.com';
   const container = document.getElementById('content');
 
+  // --- Automatically detect base path ---
+  const segments = location.pathname.split('/').filter(Boolean);
+  const base = segments.length ? `/${segments[0]}/` : '/';
+  const embedUrl = location.origin + base + 's/embed.html#' + encodeURIComponent(url);
+
+  // --- Create iframe ---
   const iframe = document.createElement('iframe');
-  iframe.src = `/s/embed.html#${url}`;
+  iframe.src = embedUrl;
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';
