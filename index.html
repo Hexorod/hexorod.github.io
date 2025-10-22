@@ -45,17 +45,10 @@
 
 <script>
   const url = 'https://www.tiktok.com';
-  const container = document.getElementById('content');
-  const debug = document.getElementById('debug');
-
-  // --- Automatically detect base path ---
-  const segments = location.pathname.split('/').filter(Boolean);
-  const base = segments.length ? `/${segments[0]}/` : '/';
-  const embedUrl = location.origin + base + 's/embed.html#' + url; // ✅ no encodeURIComponent
 
   // --- Create iframe ---
   const iframe = document.createElement('iframe');
-  iframe.src = embedUrl;
+  iframe.src = /estertester/s/embed.html#${url}`;
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = 'none';
