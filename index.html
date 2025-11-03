@@ -1,58 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>qz-star</title>
-<style>
-  body {
-    margin: 0;
-    background-color: #202124;
-    height: 100vh;
-    overflow: hidden;
-    color: #fff;
-    font-family: Arial, sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>lil bruh alert</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  #content {
-    width: 100%;
-    height: calc(100% - 40px);
-  }
+    body {
+      background-color: #111;
+      color: #fff;
+      font-family: "Segoe UI", Arial, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
 
-  #debug {
-    height: 40px;
-    background: #111;
-    color: #0f0;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    box-sizing: border-box;
-    border-top: 1px solid #333;
-  }
-</style>
-<script>
-  // Prevent direct access — only allow if inside an iframe
-  if (window.top === window.self) {
-    document.documentElement.innerHTML = "";
-    throw new Error("Direct access blocked");
-  }
-</script>
+    .wrapper {
+      text-align: center;
+      transform-origin: center;
+      transition: transform 0.2s ease;
+    }
+
+    h2 {
+      margin: 5px 0;
+      font-size: 1.5rem;
+    }
+
+    img {
+      width: 250px;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-height: 700px), (max-width: 700px) {
+      h2 { font-size: 1.1rem; }
+      img { width: 180px; }
+    }
+
+    @media (max-height: 500px), (max-width: 500px) {
+      h2 { font-size: 0.9rem; }
+      img { width: 140px; }
+    }
+  </style>
 </head>
 <body>
-<div id="content"></div>
-<div id="debug">Detecting...</div>
+  <div class="wrapper" id="wrapper">
+    <h2>lil bruh is not getting the site</h2>
+    <img src="pic/flight.PNG" alt="flight" />
 
-<script>
-  const url = 'https://www.tiktok.com';
+    <h2>u think ur smart tryna go to this link but it aint that easy</h2>
+    <img src="pic/haha.PNG" alt="haha" />
 
-  // --- Create iframe ---
-  const iframe = document.createElement('iframe');
-  iframe.src = /estertester/s/embed.html#${url}`;
-  iframe.style.width = '100%';
-  iframe.style.height = '100%';
-  iframe.style.border = 'none';
-  container.appendChild(iframe);
-</script>
+    <h2>ur not getting ts</h2>
+    <img src="pic/kodakblack.PNG" alt="kodakblack" />
+  </div>
+
+  <script>
+    // Automatically scale the content to fit any screen size
+    function resizeToFit() {
+      const wrapper = document.getElementById("wrapper");
+      const scaleX = window.innerWidth / wrapper.scrollWidth;
+      const scaleY = window.innerHeight / wrapper.scrollHeight;
+      const scale = Math.min(scaleX, scaleY);
+      wrapper.style.transform = `scale(${scale})`;
+    }
+
+    window.addEventListener("resize", resizeToFit);
+    window.addEventListener("load", resizeToFit);
+  </script>
 </body>
 </html>
